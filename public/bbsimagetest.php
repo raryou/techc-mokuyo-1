@@ -37,6 +37,10 @@ if (isset($_POST['body'])) {
                                                                                                 $select_sth->execute();
                                                                                                 ?>
                                                                                                 <!-- フォームのPOST先はこのファイル自身にする -->
+
+<head>
+  <title>画像投稿できる掲示板</title>
+</head>
                                                                                                 <form method="POST" action="./bbsimagetest.php" enctype="multipart/form-data">
                                                                                                   <textarea name="body"></textarea>
                                                                                                     <div style="margin: 1em 0;">
