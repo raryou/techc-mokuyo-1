@@ -35,6 +35,10 @@ $select_sth = $dbh->prepare('SELECT * FROM bbs_entries ORDER BY created_at DESC'
 $select_sth->execute();
 // プリペアドステートメントを使用してbbs_entriesテーブルからデータを取得し、作成日時の降順で結果を取得します
 ?>
+<head>
+  <title>画像投稿できる掲示板</title>
+</head>
+
 <form method="POST" action="./bbsimagetest.php" enctype="multipart/form-data"> 
   <textarea name="body"></textarea>
   <div style="margin: 1em 0;">
