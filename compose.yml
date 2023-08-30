@@ -9,6 +9,7 @@ services:
       - image:/var/www/upload/image/
     depends_on:
       - php
+  # webという名前のサービスを定義しています。Nginxの最新のイメージを使用しています。コンテナの内部の80ポートをホストの80ポートにマッピングしています。volumesセクションで、ホストの./nginx/conf.d/ディレクトリをコンテナ内の/etc/nginx/conf.d/ディレクトリにマウントし、./public/ディレクトリを/var/www/public/ディレクトリにマウントし、imageというボリュームを/var/www/upload/image/ディレクトリにマウントしています。また、depends_onセクションでは、このサービスがphpサービスの起動を依存関係として指定しています
   php:
     container_name: php
     build:
@@ -17,6 +18,7 @@ services:
     volumes:
       - ./public/:/var/www/public/
       - image:/var/www/upload/image/
+  # phpという名前のサービスを定義しています。container_nameでコンテナの名前を指定しています。buildセクションでは、このサービスのコンテナをどのようにビルドするかを定義しています。ここでは、カレントディレクトリ（.）をビルドのコンテキストとし、Dockerfileのphpターゲットを使用してビルドするように指定しています。volumesセクションでは、./public/ディレクトリをコンテナ内の/var/www/public/ディレクトリにマウントし、imageボリュームを/var/www/upload/image/ディレクトリにマウントしています
   mysql:
     container_name: mysql
     image: mysql:8.0
@@ -31,7 +33,9 @@ services:
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_unicode_ci
       --max_allowed_packet=4MB
+  # mysqlという名前のサービスを定義しています。container_nameでコンテナの名前を指定しています。imageセクションで、MySQL 8.0のイメージを使用するように指定しています。environmentセクションでは、MySQLコンテナの環境変数を定義しています。ここではデータベース名（MYSQL_DATABASE）、空のパスワードを許可するかどうか（MYSQL_ALLOW_EMPTY_PASSWORD）、タイムゾーン（TZ）を指定しています。volumesセクションでは、mysqlボリュームをコンテナ内の/var/lib/mysqlディレクトリにマウントしています。commandセクションでは、MySQLサーバーを起動するためのコマンドを指定しています
 volumes:
   image:
     driver: local
   mysql:
+  # volumesセクションで2つのボリューム、imageとmysqlを定義しています。これらは各サービスで使用され、データを永続化するために利用されます。imageボリュームはローカルドライバ（driver: local）を使用しており、アップロードされた画像ファイルを格納するために使用されます。mysqlボリュームはMySQLコンテナのデータディレクトリに対応しています
